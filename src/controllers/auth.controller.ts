@@ -76,7 +76,7 @@ router.get("/getUserInfo", async (req: Request, res: Response, next: NextFunctio
                 id: user?.id,
                 username: user?.username,
                 name: user?.name,
-                surname: user?.name,
+                surname: user?.surname,
                 identificationType: user?.identificationType,
                 identificationNumber:  user?.identificationNumber.toString(),
                 role: user?.role
