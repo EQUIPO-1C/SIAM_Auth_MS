@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken';
 import JWTPayload from '../interfaces/jwt_payload.interface';
-import {Response } from 'express';
+import { Response } from 'express';
 
 function generateJWTToken(payload: JWTPayload) {
-  return jwt.sign(payload, process.env.JWT_SECRET || 'JWTsecret', { expiresIn: '1h' });
+    return jwt.sign(payload, process.env.JWT_SECRET || 'JWTsecret', { expiresIn: '1h' });
 }
 
 /*
@@ -14,13 +14,17 @@ function generateRefreshToken(payload:JWTPayload) {
     }
 }*/
 
-function verifyJWTToken(res : Response ,token: string) {
-    try{
-        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'JWTsecret');
-        res.status(200).json({message: "Token is valid"});
-    }catch(error){
+function verifyJWTToken(res: Response, token: string) {
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'JWTsecret') as JWTPayload; 
+        res.status(200).json({
+            message: "Token is valid",
+            id: decoded.id,
+            username: decoded.username
+        });
+    } catch (error) {
         console.log(error);
-        res.status(500).send({  message: 'Failed to authenticate token.' });
+        res.status(500).send({ message: 'Failed to authenticate token.' });
     }
 
 }

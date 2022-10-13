@@ -11,10 +11,10 @@ datasource db {
 }
 
 model User {
-    id                   Int      @id @default(autoincrement())
+    id                   Int         @id @default(autoincrement())
     name                 String
     surname              String
-    username             String   @unique(map: "username_unique_constraint")
+    username             String      @unique(map: "username_unique_constraint")
     password             String
     birthDate            DateTime
     role                 String
@@ -26,7 +26,8 @@ model User {
     ethnicity            String
     militarySituation    String
     identificationType   String
-    identificationNumber BigInt   @unique(map: "identificationNumber_User_unique_constraint")
+    identificationNumber BigInt      @unique(map: "identificationNumber_User_unique_constraint")
+    attendants           Attendant[]
 }
 
 model Attendant {
@@ -35,4 +36,5 @@ model Attendant {
     surname              String
     identificationType   String
     identificationNumber BigInt @unique(map: "identificationNumber_Attendant_unique_constraint")
+    userAttend           User[]
 }
