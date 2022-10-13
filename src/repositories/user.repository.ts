@@ -32,4 +32,21 @@ async function getUserByUsername(username: string){
 
 }
 
-export { createUser, deleteUser, getUserByUsername };
+async function getUserInfoByUsername(username: string){
+    return await prisma.user.findUnique({
+        where: {
+            username: username
+        },
+        select: {
+            id: true,
+            username: true,
+            name: true,
+            surname: true,
+            identificationType: true,
+            identificationNumber: true,
+            role: true
+        }
+    });
+}
+
+export { createUser, deleteUser, getUserByUsername, getUserInfoByUsername };
