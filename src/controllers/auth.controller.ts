@@ -27,7 +27,6 @@ router.post("/signUp", async (req: Request, res: Response, next: NextFunction) =
 router.post("/login", async (req: Request, res: Response, next: NextFunction) => {
     try {
         const body = req.body as IUserLogin;
-
         const user = await getUserByUsername(body.username);
 
         if (!user) {
@@ -70,7 +69,6 @@ router.get("/getUserInfo", async (req: Request, res: Response, next: NextFunctio
         if (!body) {
             res.status(401).json({ message: "Empty Body" });
         } else {
-            console.log(body.username);
             const user = await getUserInfoByUsername(body.username);
             res.status(200).json({
                 id: user?.id,
