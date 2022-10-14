@@ -24,7 +24,7 @@ function verifyJWTToken(res: Response, token: string) {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).send({ message: 'Failed to authenticate token.' });
+        res.status(401).send({ message: 'Failed to authenticate token.' });
     }
 
 }
