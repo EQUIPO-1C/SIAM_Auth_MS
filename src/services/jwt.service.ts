@@ -20,7 +20,8 @@ function verifyJWTToken(res: Response, token: string) {
         res.status(200).json({
             message: "Token is valid",
             id: decoded.id,
-            username: decoded.username
+            username: decoded.username,
+            role: decoded.role
         });
     } catch (error) {
         console.log(error);
