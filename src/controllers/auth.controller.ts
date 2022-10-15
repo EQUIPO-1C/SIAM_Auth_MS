@@ -35,7 +35,7 @@ router.post("/login", async (req: Request, res: Response, next: NextFunction) =>
             const passwordValid = await argon2.verify(user.password, body.password);
             if (passwordValid) {
                 const jwtToken = generateJWTToken({ id: user.id, username: user.username, role: user.role });
-                res.status(200).json({ token: jwtToken });
+                res.status(200).json({ token: jwtToken, role: user.role });
             } else {
                 res.status(401).json({ message: "Wrong password" });
             }
