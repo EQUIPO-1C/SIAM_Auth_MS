@@ -12,7 +12,6 @@ Para ejecutar esta aplicacion `npm run dev`
 
 ## Docker
 Para crear la imagen de docker, usa este comando en el directorio raiz del proyector donde esta localizado el archivo Dockerfile
-Build your image in the root directory of the project
 	
 	docker build -t auth_ms .
 
@@ -21,7 +20,7 @@ Para correr la imagen
 	docker run -p 3000:3000 -e DATABASE_URL=mysql://<THE DATABASE USER>:<THE DATABASE PASSWORD>@host.docker.internal:3306/auth-db -e JWT_SECRET=<SECRET JWT SEED> -e PORT=<APP PORT> --name auth_ms auth_ms
 
 ## Conexion a la DB y creacion de las tablas en la DB
-Con la imagen corriendo haciendo uso del bash ejecutar los siguientes comandos (Nota: La DB debe estar ejecutandose)
+Con la imagen corriendo haciendo uso del bash ejecutar los siguientes comandos (Nota: La DB debe estar ejecutandose)\n
 Creacion del Prisma Client
 	
 	npx prisma generate
