@@ -11,7 +11,7 @@ Usando una terminal en el directorio raiz del proyecto usaras el siguiente coman
 Para ejecutar esta aplicacion `npm run dev`
 
 ## Docker
-Para crear la imagen de docker, usa este comando en el directorio raiz del proyector donde esta localizado el archivo Dockerfile
+Para crear la imagen de docker, usa este comando en el directorio raiz del proyecto donde esta localizado el archivo Dockerfile
 	
 	docker build -t auth_ms .
 
