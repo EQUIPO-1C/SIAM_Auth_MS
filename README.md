@@ -1,2 +1,21 @@
 # SIAM_Auth_MS
 Microservicio de Autenticacion para el proyecto de Arquitectura de Software
+Esta aplicacion es una REST API CRUD usando TypeScript y Prisma
+
+## Desarrollo
+
+Para el desarrollo de vez contar contar con `Node JS`
+
+Usando una terminal en el directorio raiz del proyecto usaras el siguiente comando para instalar las dependencias `npm install`
+
+Para ejecutar esta aplicacion `npm run dev`
+
+## Docker
+Para crear la imagen de docker, usa este comando en el directorio raiz del proyector donde esta localizado el archivo Dockerfile
+Build your image in the root directory of the project
+	
+	docker build -t auth_ms .
+
+Para correr la imagen
+
+	docker run -p 3000:3000 -e DATABASE_URL=mysql://<THE DATABASE USER>:<THE DATABASE PASSWORD>@host.docker.internal:3306/auth-db -e JWT_SECRET=<SECRET JWT SEED> -e PORT=<APP PORT> --name auth_ms auth_ms
