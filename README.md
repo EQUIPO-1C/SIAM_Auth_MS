@@ -20,12 +20,12 @@ Para correr la imagen
 	docker run -p 3000:3000 -e DATABASE_URL=mysql://<THE DATABASE USER>:<THE DATABASE PASSWORD>@host.docker.internal:3306/auth-db -e JWT_SECRET=<SECRET JWT SEED> -e PORT=<APP PORT> --name auth_ms auth_ms
 
 ## Conexion a la DB y creacion de las tablas en la DB
-Con la imagen corriendo haciendo uso del bash ejecutar los siguientes comandos (Nota: La DB debe estar ejecutandose)\n
+Con la imagen corriendo haciendo uso del bash ejecutar los siguientes comandos (Nota: La DB debe estar ejecutandose)
+
 Creacion del Prisma Client
 	
 	npx prisma generate
 
-Para correr la imagen
 Creacion las tablas en las bases de datos
 
 	npx prisma migrate dev
