@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(routes);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3020;
 
 app.use((err: Error | Prisma.PrismaClientKnownRequestError, req: Request, res: Response, next: NextFunction) => {
     console.log(err);

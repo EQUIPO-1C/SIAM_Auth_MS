@@ -17,7 +17,7 @@ Para crear la imagen de docker, usa este comando en el directorio raiz del proye
 
 Para correr la imagen
 
-	docker run -p 3000:3000 -e DATABASE_URL=mysql://<THE DATABASE USER>:<THE DATABASE PASSWORD>@host.docker.internal:3306/auth-db -e JWT_SECRET=<SECRET JWT SEED> -e PORT=3000 --name auth_ms auth_ms
+	docker run -p 3020:3020 -e DATABASE_URL=mysql://<THE DATABASE USER>:<THE DATABASE PASSWORD>@host.docker.internal:3306/auth-db -e JWT_SECRET=<SECRET JWT SEED> -e PORT=3020 --name auth_ms auth_ms
 
 ## Conexion a la DB y creacion de las tablas en la DB
 Con la imagen corriendo haciendo uso del bash, ejecutar los siguientes comandos (Nota: La DB debe estar ejecutandose)
