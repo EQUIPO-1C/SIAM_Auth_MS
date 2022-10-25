@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { IUserCreate, IUserLogin } from "../interfaces/user.interface";
-import { createUser, getUserByUsername, getUserInfoByUsername } from "../repositories/user.repository";
+import { createUser, getUserByUsername, getUserInfoByUsername, getAllUserInfoByUsername } from "../repositories/user.repository";
 import * as argon2 from "argon2";
 import { generateJWTToken, verifyJWTToken } from "../services/jwt.service";
 
@@ -72,8 +72,37 @@ router.get("/getUserInfo", async (req: Request, res: Response, next: NextFunctio
                 name: user?.name,
                 surname: user?.surname,
                 identificationType: user?.identificationType,
-                identificationNumber:  user?.identificationNumber.toString(),
+                identificationNumber: user?.identificationNumber.toString(),
                 role: user?.role
+            });
+        }
+    } catch (err) {
+        next(err);
+    }
+
+});
+
+router.get("/getAllUserInfo", async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const body = req.body;
+        if (!body) {
+            res.status(401).json({ message: "Empty Body" });
+        } else {
+            const user = await getAllUserInfoByUsername(body.username);
+            res.status(200).json({
+                name: user?.name,
+                surname: user?.surname,
+                role: user?.role,
+                identificationType: user?.identificationType,
+                identificationNumber: user?.identificationNumber.toString(),
+                birthDate: user?.birthDate.toDateString(),
+                nationality: user?.nationality,
+                address: user?.address,
+                city: user?.city,
+                level: user?.level,
+                bloodType: user?.bloodType,
+                ethnicity: user?.ethnicity,
+                militarySituation: user?.militarySituation
             });
         }
     } catch (err) {

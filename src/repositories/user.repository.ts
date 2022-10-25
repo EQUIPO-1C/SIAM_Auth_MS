@@ -1,15 +1,15 @@
 import prisma from "../../prisma/prisma.client";
 import { IUserCreate } from "../interfaces/user.interface";
 
-async function createUser(user: IUserCreate){
+async function createUser(user: IUserCreate) {
     return await prisma.user.create({
         data: {
             ...user
         }
-    });    
+    });
 }
 
-async function deleteUser(id: number){
+async function deleteUser(id: number) {
     return await prisma.user.delete({
         where: {
             id: id
@@ -17,7 +17,7 @@ async function deleteUser(id: number){
     });
 }
 
-async function getUserByUsername(username: string){
+async function getUserByUsername(username: string) {
     return await prisma.user.findUnique({
         where: {
             username: username
@@ -32,7 +32,7 @@ async function getUserByUsername(username: string){
 
 }
 
-async function getUserInfoByUsername(username: string){
+async function getUserInfoByUsername(username: string) {
     return await prisma.user.findUnique({
         where: {
             username: username
@@ -48,5 +48,27 @@ async function getUserInfoByUsername(username: string){
         }
     });
 }
+async function getAllUserInfoByUsername(username: string) {
+    return await prisma.user.findUnique({
+        where: {
+            username: username
+        },
+        select: {
+            name: true,
+            surname: true,
+            role: true,
+            identificationType: true,
+            identificationNumber: true,
+            birthDate: true,
+            nationality: true,
+            address: true,
+            city: true,
+            level: true,
+            bloodType: true,
+            ethnicity: true,
+            militarySituation: true
+        }
+    });
+}
 
-export { createUser, deleteUser, getUserByUsername, getUserInfoByUsername };
+export { createUser, deleteUser, getUserByUsername, getUserInfoByUsername, getAllUserInfoByUsername };
