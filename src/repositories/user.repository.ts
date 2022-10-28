@@ -66,9 +66,24 @@ async function getAllUserInfoByUsername(username: string) {
             level: true,
             bloodType: true,
             ethnicity: true,
-            militarySituation: true
+            militarySituation: true, 
+            attendants: true
         }
     });
 }
 
-export { createUser, deleteUser, getUserByUsername, getUserInfoByUsername, getAllUserInfoByUsername };
+async function updateUserAttendants(userID: number, attendantID: number) {
+    return await prisma.user.update({
+        where: {
+            id: userID
+        }, data: {
+            attendants:{
+                connect:{
+                    id: attendantID,
+                },
+            },
+        },
+    });
+}
+
+export { createUser, deleteUser, getUserByUsername, getUserInfoByUsername, getAllUserInfoByUsername, updateUserAttendants };

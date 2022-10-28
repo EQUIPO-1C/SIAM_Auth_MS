@@ -1,8 +1,10 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { IUserCreate, IUserLogin } from "../interfaces/user.interface";
-import { createUser, getUserByUsername, getUserInfoByUsername, getAllUserInfoByUsername } from "../repositories/user.repository";
+import { IAttendantCreate, IAttendantPost } from "../interfaces/attendant.interface";
+import { createUser, getUserByUsername, getUserInfoByUsername, getAllUserInfoByUsername, updateUserAttendants } from "../repositories/user.repository";
 import * as argon2 from "argon2";
 import { generateJWTToken, verifyJWTToken } from "../services/jwt.service";
+import { createAttendant } from "../repositories/attendant.repository";
 
 const router = Router();
 
@@ -89,6 +91,17 @@ router.get("/getAllUserInfo", async (req: Request, res: Response, next: NextFunc
             res.status(401).json({ message: "Empty Body" });
         } else {
             const user = await getAllUserInfoByUsername(body.username);
+            const aux: IAttendantPost[] = []
+            user?.attendants.forEach((attendant) => {
+                aux.push({
+                    name: attendant?.name,
+                    surname: attendant?.surname,
+                    identificationType: attendant?.identificationType,
+                    identificationNumber: attendant?.identificationNumber.toString()
+                })
+            })
+            //console.log(aux);
+            
             res.status(200).json({
                 name: user?.name,
                 surname: user?.surname,
@@ -102,13 +115,40 @@ router.get("/getAllUserInfo", async (req: Request, res: Response, next: NextFunc
                 level: user?.level,
                 bloodType: user?.bloodType,
                 ethnicity: user?.ethnicity,
-                militarySituation: user?.militarySituation
+                militarySituation: user?.militarySituation,
+                attendants: aux
             });
         }
     } catch (err) {
         next(err);
     }
 
+});
+
+router.post("/signUpAttendant", async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const body = req.body as IAttendantCreate;
+
+        const user = await createAttendant(body);
+
+        res.status(201).json({ message: "Attendant Created" });
+
+    } catch (err) {
+        next(err);
+    }
+});
+
+router.post("/updateUserAttendant", async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const body = req.body;
+
+        const user = await updateUserAttendants(body.userID, body.attendantID);
+
+        res.status(201).json({ message: "User Update Attendant Added" });
+
+    } catch (err) {
+        next(err);
+    }
 });
 
 export default router;
