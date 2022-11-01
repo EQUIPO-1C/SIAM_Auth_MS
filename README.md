@@ -4,7 +4,7 @@ Esta aplicacion es una REST API CRUD usando TypeScript y Prisma
 
 ## Desarrollo
 
-Para el desarrollo de vez contar contar con `Node JS`
+Para el desarrollo debes contar con `Node JS`
 
 Usando una terminal en el directorio raiz del proyecto usaras el siguiente comando para instalar las dependencias `npm install`
 
