@@ -66,7 +66,31 @@ async function getAllUserInfoByUsername(username: string) {
             level: true,
             bloodType: true,
             ethnicity: true,
-            militarySituation: true, 
+            militarySituation: true,
+            attendants: true
+        }
+    });
+}
+
+async function getAllUserInfoByDocument(identificationNumber: number) {
+    return await prisma.user.findUnique({
+        where: {
+            identificationNumber: identificationNumber
+        },
+        select: {
+            name: true,
+            surname: true,
+            role: true,
+            identificationType: true,
+            identificationNumber: true,
+            birthDate: true,
+            nationality: true,
+            address: true,
+            city: true,
+            level: true,
+            bloodType: true,
+            ethnicity: true,
+            militarySituation: true,
             attendants: true
         }
     });
@@ -77,8 +101,8 @@ async function updateUserAttendants(userID: number, attendantID: number) {
         where: {
             id: userID
         }, data: {
-            attendants:{
-                connect:{
+            attendants: {
+                connect: {
                     id: attendantID,
                 },
             },
@@ -86,4 +110,4 @@ async function updateUserAttendants(userID: number, attendantID: number) {
     });
 }
 
-export { createUser, deleteUser, getUserByUsername, getUserInfoByUsername, getAllUserInfoByUsername, updateUserAttendants };
+export { createUser, deleteUser, getUserByUsername, getUserInfoByUsername, getAllUserInfoByUsername, updateUserAttendants, getAllUserInfoByDocument };
