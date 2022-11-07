@@ -1,4 +1,3 @@
-
 FROM node:16.0.0-alpine3.13 AS builder
 
 WORKDIR /app
@@ -8,7 +7,7 @@ COPY prisma ./prisma/
 
 RUN npm install
 RUN npx prisma generate
-RUN npx prisma migrate dev
+# RUN npx prisma migrate dev
 
 COPY . .
 
