@@ -5,6 +5,8 @@ WORKDIR /app
 COPY package*.json ./
 COPY prisma ./prisma/
 
+ENV DATABASE_URL=mysql://root:a2MCOkkDEyjNytTTlMDM@containers-us-west-102.railway.app:6182/railway
+ENV JWT_SECRET=aSIs6frZ6gLrkwtJDxl8o7vNy987tMHl
 RUN npm install
 RUN npx prisma generate
 # RUN npx prisma migrate dev
