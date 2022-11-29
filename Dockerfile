@@ -1,12 +1,13 @@
 FROM node:16.0.0-alpine3.13 AS builder
 
 WORKDIR /app
+ENV DATABASE_URL="mysql://root:12345@10.208.0.3:3306/authdb"
+ENV JWT_SECRET="aSIs6frZ6gLrkwtJDxl8o7vNy987tMHl"
 
 COPY package*.json ./
 COPY prisma ./prisma/
 
-ENV DATABASE_URL=mysql://root:a2MCOkkDEyjNytTTlMDM@containers-us-west-102.railway.app:6182/railway
-ENV JWT_SECRET=aSIs6frZ6gLrkwtJDxl8o7vNy987tMHl
+
 RUN npm install
 RUN npx prisma generate
 # RUN npx prisma migrate dev
